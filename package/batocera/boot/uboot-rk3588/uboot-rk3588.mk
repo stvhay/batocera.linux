@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-UBOOT_RK3588_VERSION = e1bb28dd5be8e347096be7b0ea4e64716d054268
+UBOOT_RK3588_VERSION = 2f6e967dc901ae570f522d1b47309e7c34acf542
 UBOOT_RK3588_SITE = $(call github,stvhay,u-boot,$(UBOOT_RK3588_VERSION))
 UBOOT_RK3588_LICENSE = GPL + Rockchip Proprietary (Extra Downloads)
 
