@@ -36,6 +36,15 @@ postBootRWConfig() {
     mount -o remount,ro /boot
 }
 
+checkModel_s922x() {
+	MODEL=$(cat /sys/firmware/devicetree/base/model)
+	test \
+		"${MODEL}" = "Hardkernel ODROID-N2Plus" -o \
+		"${MODEL}" = "Hardkernel ODROID-N2L" -o \
+		"${MODEL}" = "Khadas VIM3" -o \
+		"${MODEL}" = "Beelink GT-King Pro"
+}
+
 doList() {
     case "${ARCH}" in
     "bcm2835")
@@ -72,8 +81,7 @@ doList() {
 	    echo "none NONE (1000Mhz)"
 	;;
 	"s922x")
-	    MODEL=$(cat /sys/firmware/devicetree/base/model)
-	    if test "${MODEL}" = "Hardkernel ODROID-N2Plus" -o "${MODEL}" = "Khadas VIM3" -o "${MODEL}" = "Beelink GT-King Pro"
+	    if checkModel_s922x
 	    then
 		echo "none NONE (2200Mhz)"
 		echo "high HIGH (2300Mhz)"
@@ -290,8 +298,7 @@ setValue() {
 	    esac
 	    ;;
 	"s922x")
-	    MODEL=$(cat /sys/firmware/devicetree/base/model)
-	    if test "${MODEL}" = "Hardkernel ODROID-N2Plus" -o "${MODEL}" = "Khadas VIM3" -o "${MODEL}" = "Beelink GT-King Pro"
+	    if checkModel_s922x
 	    then
 		setValue_odroidn2 "${VALUE}"
 	    fi
